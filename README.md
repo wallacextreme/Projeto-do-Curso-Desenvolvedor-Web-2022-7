@@ -1,69 +1,36 @@
-﻿# App Orçamento Pessoal — Controle Financeiro com JavaScript ES6+ & LocalStorage
+﻿# App Orçamento Pessoal — Modelagem em JavaScript ES6+ & LocalStorage
 
-[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+_Classes-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 [![HTML5](https://img.shields.io/badge/HTML5-Semântico-E34F26?style=flat-square&logo=html5&logoColor=white)](https://developer.mozilla.org/pt-BR/docs/Web/HTML)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-4.0.0-7952B3?style=flat-square&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 [![LocalStorage](https://img.shields.io/badge/Storage-Web_Storage_API-005C84?style=flat-square)](https://developer.mozilla.org/pt-BR/docs/Web/API/Window/localStorage)
-[![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Study_Project-blue?style=flat-square)](#)
 
-Aplicação web interativa para gestão e controle de despesas financeiras cotidianas, construída com **JavaScript Orientado a Objetos (ES6+)**, persistência local no navegador via **Web Storage API (`localStorage`)** e interface dinâmica com **Bootstrap 4**.
+Aplicação web desenvolvida para prática de **JavaScript Orientado a Objetos (ES6+)**, estruturando a modelagem de entidades financeiras, rotinas de validação de formulários, controle de armazenamento local com a **Web Storage API (`localStorage`)** e interface com **Bootstrap 4**.
 
 ---
 
 ## 🎯 Objetivo
 
-Oferecer uma ferramenta prática para cadastro, validação e consulta de despesas domésticas ou pessoais sem necessidade de infraestrutura de servidor, demonstrando conceitos fundamentais de modelagem orientada a objetos, manipulação do DOM e persistência no client-side.
+Exercitar a transição de scripts procedurais para a programação orientada a objetos no JavaScript moderno, demonstrando a criação de classes para representação de dados (`Despesa`) e abstração da camada de persistência (`Bd`), além de manipulação dinâmica de modais para feedback visual.
 
 ---
 
-## ✨ Principais Funcionalidades
+## ✨ Estrutura & Funcionalidades
 
-- **Cadastro de Despesas**: Formulário completo com categorização por data (ano, mês, dia), tipo (alimentação, educação, lazer, saúde, transporte), descrição e valor monetário.
-- **Validação de Dados**: Verificação prévia de campos obrigatórios via método da classe `Despesa`, impedindo o registro de valores nulos ou vazios.
-- **Feedback Visual com Modais**: Diálogos modais do Bootstrap dinamicamente customizados para notificar o usuário em caso de sucesso ou erro no preenchimento.
-- **Persistência Local (Offline)**: Classe `Bd` dedicada que gerencia IDs sequenciais e armazena registros serializados em formato JSON no `localStorage`.
-- **Consulta e Listagem**: Tela dedicada (`consulta.html`) preparada para exibição tabular dos dados gravados.
+- **Modelagem de Entidade (`Classe Despesa`)**: Construtor com propriedades (ano, mês, dia, tipo, descrição, valor) e método `validarDados()` para checagem de preenchimento obrigatório.
+- **Camada de Armazenamento Local (`Classe Bd`)**: Métodos `getProximoId()`, `gravar()` e `recuperarTodosRegistros()` com serialização JSON e manipulação de chaves no `localStorage`.
+- **Feedback Visual com Modais Bootstrap**: Diálogos modais (`#modalRegistraDespesa`) manipulados dinamicamente via DOM para alertar sobre sucesso no preenchimento ou necessidade de correção.
+- **Interface de Consulta Preparada (`consulta.html`)**: Tela com filtros por período e categoria, estruturada para listagem tabular.
 
 ---
 
 ## 🧰 Stack Tecnológica
 
-- **JavaScript Moderno (ES6+)**:
-  - Programação Orientada a Objetos com `class`, `constructor` e métodos de instância.
-  - Serialização e desserialização com `JSON.stringify` e `JSON.parse`.
-  - Manipulação de coleções (`Array`, iteração, filtros).
-  - Manipulação da API DOM (`document.getElementById`, manipulação de classes CSS).
-- **HTML5**: Estrutura semântica dos formulários e tabelas.
-- **Bootstrap 4.0 & jQuery/Popper**: Grid responsivo, tipografia e componentes de modais.
-- **Font Awesome 5**: Ícones para botões e sinalizações visuais.
-
----
-
-## 🏗️ Arquitetura
-
-O projeto adota uma separação simples e elegante entre o modelo de domínio e o armazenamento:
-
-```text
-[ Interface do Usuário (HTML + Bootstrap) ]
-                     │
-          [ Evento: cadastrarDespesa() ]
-                     │
-                     ▼
-          ┌─────────────────────┐
-          │   Classe Despesa    │  <-- Representa a entidade financeira
-          │  .validarDados()    │      e suas regras de integridade
-          └──────────┬──────────┘
-                     │ (Se válido)
-                     ▼
-          ┌─────────────────────┐
-          │      Classe Bd      │  <-- Camada de acesso a dados (DAO/Repository)
-          │  .gravar()          │      Gerencia chaves, IDs e serialização
-          │  .recuperarTodos()  │
-          └──────────┬──────────┘
-                     │
-                     ▼
-             [ localStorage ]
-```
+- **JavaScript Moderno (ES6+)**: Classes com `class`, `constructor`, instanciação com `new`, iteração de propriedades e serialização JSON.
+- **HTML5**: Estrutura dos formulários de lançamento e telas de consulta.
+- **Bootstrap 4.0, jQuery & Popper.js**: Componentes de modais, inputs e barra de navegação.
+- **Font Awesome 5**: Ícones de suporte visual.
 
 ---
 
@@ -71,31 +38,29 @@ O projeto adota uma separação simples e elegante entre o modelo de domínio e 
 
 ```text
 Projeto-do-Curso-Desenvolvedor-Web-2022-7/
-├── index.html        # Página de inclusão e cadastro de novas despesas
-├── consulta.html     # Página de consulta e filtragem das despesas salvas
-├── app.js            # Regras de negócio, classes Despesa e Bd, manipulação DOM
+├── index.html        # Tela de inclusão e cadastro de despesas
+├── consulta.html     # Tela de consulta com filtros
+├── app.js            # Classes Despesa e Bd, funções de captura e modais
 ├── logo.png          # Logotipo da aplicação
-└── README.md         # Documentação técnica do projeto
+└── README.md         # Documentação técnica
 ```
 
 ---
 
-## 🚀 Como Executar
+## 🚀 Como Visualizar
 
-Por ser uma aplicação 100% estática client-side, não há necessidade de compiladores ou servidores de back-end:
-
-1. Clone o repositório ou faça o download dos arquivos:
+1. Clone o repositório:
    ```bash
    git clone https://github.com/wallacextreme/Projeto-do-Curso-Desenvolvedor-Web-2022-7.git
    ```
-2. Abra o arquivo `index.html` diretamente em qualquer navegador moderno (Chrome, Edge, Firefox, Safari) ou utilize uma extensão como o *Live Server* do VS Code.
+2. Abra `index.html` em qualquer navegador web moderno.
 
 ---
 
 ## 📌 Status
 
-- **Status**: Concluído / Projeto de Consolidação de JavaScript OOP.
-- **Competências demonstradas**: JavaScript ES6+, Web Storage API, manipulação de eventos e DOM, componentização de modais com Bootstrap.
+- **Maturidade**: Projeto de Estudo de JavaScript OOP.
+- **Competências em evidência**: Classes em JavaScript ES6+, métodos de validação, manipulação do `localStorage` e integração com componentes modais Bootstrap.
 
 ---
 
